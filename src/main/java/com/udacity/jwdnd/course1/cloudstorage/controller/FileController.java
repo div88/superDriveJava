@@ -49,10 +49,10 @@ public class FileController {
         return "home";
     }
 
-    @RequestMapping("/file/view/{fileid}")
-    public ResponseEntity downloadFile(@PathVariable("fileid") Integer fileid,
+    @RequestMapping("/file/view/{fileId}")
+    public ResponseEntity downloadFile(@PathVariable("fileId") Integer fileId,
                                        Authentication authentication) throws IOException {
-        File file = fileService.getFileById(fileid);
+        File file = fileService.getFileById(fileId);
         String contentType = file.getContentType();
         String fileName = file.getFileName();
         return ResponseEntity.ok()

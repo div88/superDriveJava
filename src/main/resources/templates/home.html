@@ -61,6 +61,13 @@
                                 </tr>
                                 <tr th:each="file: ${files}">
                                     <td>
+                                        <a target="_blank" class="btn btn-success"
+                                           th:href="@{/file/view/{fileId}(fileId=${file.fileId})}">
+                                            View
+                                        </a>
+                                        <a class="btn btn-danger" th:href="@{/file-delete/{fileId}(fileId=${file.fileId})}">
+                                            Delete
+                                        </a>
 <!--                                        <a target="_blank" class="btn btn-success" th:href="@{/file/view/{fileId}{fileId=${file.fileId})}">View</a>-->
 <!--                                        <a th:href="${file.dataURL}" th:download="${file.filename}" class="btn btn-success">Download</a>-->
 <!--                                        <a th:href="@{/files/delete(id=${file.fileid})}" class="btn btn-danger">Delete</a>-->
