@@ -21,10 +21,6 @@ public class CredentialService {
     }
 
     public Credential addCredential(String url, String userName, String password, Integer userId) throws IOException {
-        System.out.println(url);
-        System.out.println(userName);
-        System.out.println(password);
-        System.out.println(userId);
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
@@ -32,7 +28,6 @@ public class CredentialService {
         EncryptionService encryptionService = new EncryptionService();
         String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
         Credential newCredential = new Credential(url, userName, encryptedPassword, encodedKey, userId);
-        System.out.println(newCredential);
 
         try {
             credentialsMapper.save(newCredential);

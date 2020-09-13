@@ -41,10 +41,6 @@ public class CredentialController {
 
         if(credentialId == null) {
             try {
-                System.out.println("A" + credentialUrl);
-                System.out.println(credentialUsername);
-                System.out.println(credentialPassword);
-                System.out.println(userid);
                 this.credentialService.addCredential(credentialUrl, credentialUsername, credentialPassword, userid);
                 model.addAttribute("credentialUploadSuccess", "Credential Added Successfully.");
             } catch (Exception e) {
@@ -66,7 +62,6 @@ public class CredentialController {
         }
 
         model.addAttribute("credentials", this.credentialService.getAllCredentials(userid));
-        System.out.println("XXXX" + this.credentialService.getAllCredentials(userid));
         return "home";
     }
 }
