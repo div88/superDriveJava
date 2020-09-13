@@ -33,10 +33,6 @@ public class HomeController {
 
         model.addAttribute("files", filesService.getAllFiles(userid));
         model.addAttribute("notes", notesService.getAllByUserId(userid));
-        System.out.println("*************************************");
-        System.out.println("YYYYY" + filesService.getAllFiles(userid));
-        System.out.println(notesService.getAllByUserId(userid));
-        System.out.println("*************************************");
         return "home";
     }
 }

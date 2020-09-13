@@ -40,16 +40,13 @@ public class FileController {
             } catch (Exception e) {
                 fileUploadError = e.toString();
                 model.addAttribute("fileError", fileUploadError);
-                return "redirect:/result?error";
             }
         } else {
             model.addAttribute("fileError", "Can't upload files with duplicate names.");
         }
 
         model.addAttribute("files", this.fileService.getAllFiles(currentUser.getUserId()));
-        System.out.println("XXXX" + this.fileService.getAllFiles(currentUser.getUserId()));
         return "home";
-//        return "redirect:/result?success";
     }
 
     @RequestMapping("/file/view/{fileid}")
