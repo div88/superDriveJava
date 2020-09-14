@@ -66,7 +66,6 @@ public class CredentialController {
         model.addAttribute("files", this.fileService.getAllFiles(userid));
         model.addAttribute("notes", notesService.getAllByUserId(userid));
         model.addAttribute("credentials", this.credentialService.getAllCredentials(userid));
-        System.out.println("Iside updalod" + this.credentialService.getAllCredentials(userid));
         return "home";
     }
 
@@ -88,7 +87,6 @@ public class CredentialController {
         model.addAttribute("files", this.fileService.getAllFiles(userid));
         model.addAttribute("notes", this.notesService.getAllByUserId(userid));
         model.addAttribute("credentials", this.credentialService.getAllCredentials(userid));
-        System.out.println(this.credentialService.getAllCredentials(userid));
         return "home";
     }
 

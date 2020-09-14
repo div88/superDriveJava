@@ -38,14 +38,14 @@ public class CredentialService {
         return newCredential;
     }
 
-    public Credential updateCredential(Integer credentialId, String url, String userName, String password, Integer userid) throws IOException {
+    public Credential updateCredential(Integer credentialId, String url, String username, String password, Integer userid) throws IOException {
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
         EncryptionService encryptionService = new EncryptionService();
         String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
-        Credential newCredential = new Credential(url, userName, encryptedPassword, encodedKey, userid);
+        Credential newCredential = new Credential(credentialId, url, username, encryptedPassword, encodedKey, userid);
 
         try {
             credentialsMapper.update(newCredential);
@@ -53,7 +53,6 @@ public class CredentialService {
             e.printStackTrace();
         }
 
-        System.out.println(newCredential);
         return newCredential;
     }
 

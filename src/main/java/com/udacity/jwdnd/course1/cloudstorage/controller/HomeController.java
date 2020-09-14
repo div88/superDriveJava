@@ -38,7 +38,6 @@ public class HomeController {
         model.addAttribute("files", filesService.getAllFiles(userid));
         model.addAttribute("notes", notesService.getAllByUserId(userid));
         model.addAttribute("credentials", credentialService.getAllCredentials(userid));
-        System.out.println(notesService.getAllByUserId(userid));
         return "home";
     }
 }
