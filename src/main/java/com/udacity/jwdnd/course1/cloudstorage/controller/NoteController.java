@@ -37,6 +37,8 @@ public class NoteController {
             }
 
             model.addAttribute("success", true);
+            model.addAttribute("notes", notesService.getAllByUserId(userid));
+            System.out.println(notesService.getAllByUserId(userid));
             return "redirect:/result?success";
         } catch (Exception e) {
             model.addAttribute("error", true);

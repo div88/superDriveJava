@@ -8,13 +8,13 @@ import java.util.List;
 
 @Mapper
 public interface CredentialsMapper {
-    @Select("SELECT * FROM CREDENTIALS WHERE userId = #{userId}")
-    List<Credential> findCredentialsByUserId(@Param("userId") Integer userId);
+    @Select("SELECT * FROM CREDENTIALS WHERE userid = #{userid}")
+    List<Credential> findCredentialsByUserId(@Param("userid") Integer userid);
 
     @Select("SELECT * FROM CREDENTIALS WHERE credentialId = #{credentialId}")
     List<Credential> findById( Integer credentialId);
 
-    @Insert("INSERT INTO CREDENTIALS (url, username, key, password, userId) VALUES (#{credential.url}, #{credential.username}, #{credential.key}, #{credential.password}, #{credential.userId})")
+    @Insert("INSERT INTO CREDENTIALS (url, username, key, password, userid) VALUES (#{credential.url}, #{credential.username}, #{credential.key}, #{credential.password}, #{credential.userid})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
     Integer save(@Param("credential") Credential credential);
 

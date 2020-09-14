@@ -20,14 +20,14 @@ public class CredentialService {
         this.credentialsMapper = credentialsMapper;
     }
 
-    public Credential addCredential(String url, String userName, String password, Integer userId) throws IOException {
+    public Credential addCredential(String url, String userName, String password, Integer userid) throws IOException {
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
         EncryptionService encryptionService = new EncryptionService();
         String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
-        Credential newCredential = new Credential(url, userName, encryptedPassword, encodedKey, userId);
+        Credential newCredential = new Credential(url, userName, encryptedPassword, encodedKey, userid);
 
         try {
             credentialsMapper.save(newCredential);
@@ -38,14 +38,14 @@ public class CredentialService {
         return newCredential;
     }
 
-    public Credential updateCredential(Integer credentialId, String url, String userName, String password, Integer userId) throws IOException {
+    public Credential updateCredential(Integer credentialId, String url, String userName, String password, Integer userid) throws IOException {
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
         EncryptionService encryptionService = new EncryptionService();
         String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
-        Credential newCredential = new Credential(url, userName, encryptedPassword, encodedKey, userId);
+        Credential newCredential = new Credential(url, userName, encryptedPassword, encodedKey, userid);
 
         try {
             credentialsMapper.update(newCredential);
@@ -53,10 +53,23 @@ public class CredentialService {
             e.printStackTrace();
         }
 
+        System.out.println(newCredential);
         return newCredential;
     }
 
     public List<Credential> getAllCredentials(Integer userId) {
         return credentialsMapper.findCredentialsByUserId(userId);
+    }
+
+    public void deleteCredential(Integer credentialId) throws IOException {
+        try {
+            credentialsMapper.delete(credentialId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Credential decodePassword(Integer credentialId){
+        return (Credential) credentialsMapper.findById(credentialId);
     }
 }

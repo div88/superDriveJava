@@ -2,7 +2,9 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
+import com.udacity.jwdnd.course1.cloudstorage.service.CredentialService;
 import com.udacity.jwdnd.course1.cloudstorage.service.FileService;
+import com.udacity.jwdnd.course1.cloudstorage.service.NotesService;
 import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,11 +21,15 @@ import java.io.IOException;
 @Controller
 public class FileController {
     private UserService userService;
+    private NotesService notesService;
     private FileService fileService;
+    private CredentialService credentialService;
 
-    public FileController (UserService userService, FileService fileService) {
+    public FileController (UserService userService, FileService fileService, NotesService notesService, CredentialService credentialService) {
         this.userService = userService;
         this.fileService = fileService;
+        this.notesService = notesService;
+        this.credentialService = credentialService;
     }
 
     @RequestMapping(value = "/file-upload", method = RequestMethod.POST)
@@ -52,7 +58,7 @@ public class FileController {
         }
 
         model.addAttribute("files", this.fileService.getAllFiles(currentUser.getUserId()));
-        return "home";
+        return "redirect:/home";
     }
 
     @RequestMapping("/file/view/{fileId}")
@@ -83,6 +89,8 @@ public class FileController {
             model.addAttribute("fileError", fileDeleteError);
         }
         model.addAttribute("files", this.fileService.getAllFiles(userid));
+        model.addAttribute("notes", notesService.getAllByUserId(userid));
+        model.addAttribute("credentials", this.credentialService.getAllCredentials(userid));
         return "home";
     }
 }
