@@ -156,7 +156,7 @@ class CloudStorageApplicationTests {
 		}
 		Assertions.assertTrue(noteDeleted);
 	}
-	
+
 	@Test
 	public void testCredentials() throws InterruptedException {
 		driver.get("http://localhost:" + this.port + "/login");

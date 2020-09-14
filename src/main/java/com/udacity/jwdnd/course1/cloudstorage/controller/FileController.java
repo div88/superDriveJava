@@ -33,6 +33,12 @@ public class FileController {
         Integer userid = currentUser.getUserId();
 
         String fileUploadError = null;
+        if (fileUpload.isEmpty()){
+            model.addAttribute("fileUploadEmpty", "Can't upload empty files.");
+            model.addAttribute("files", this.fileService.getAllFiles(currentUser.getUserId()));
+            return "home";
+        }
+
         if(this.fileService.isFileNameAvailable(fileUpload, currentUser.getUserId())) {
             try {
                 this.fileService.uploadFile(fileUpload, userid);
