@@ -17,7 +17,7 @@ public class Note {
         return noteId;
     }
 
-    public void setNoteId(Integer noteid) {
+    public void setNoteId(Integer noteId) {
         this.noteId = noteId;
     }
 

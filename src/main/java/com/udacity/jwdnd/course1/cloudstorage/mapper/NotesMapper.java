@@ -21,7 +21,7 @@ public interface NotesMapper {
     @Insert("INSERT INTO notes (notetitle, notedescription, userid) VALUES (#{note.noteTitle}, #{note.noteDescription}, #{userid})")
     Integer create(@Param("note") Note note, Integer userid);
 
-    @Update("UPDATE notes SET notetitle = #{note.noteTitle}, notedescription = #{note.noteDescription} WHERE noteid = #{note.noteid} AND userid = #{userid}")
+    @Update("UPDATE notes SET notetitle = #{note.noteTitle}, notedescription = #{note.noteDescription} WHERE noteid = #{note.noteId} AND userid = #{userid}")
     Integer update(@Param("note") Note note, Integer userid);
 
     @Delete("DELETE FROM notes WHERE noteid = #{id} AND userid = #{userid}")
