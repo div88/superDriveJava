@@ -26,7 +26,6 @@ public class CredentialController {
 
 
     @PostMapping("/credential-upload")
-//    public String addCredential(Integer credentialId, String credentialUrl, String credentialUsername, String credentialPassword, Model model) throws IOException {
     public String uploadCredential(@RequestParam("credentialId") Integer credentialId,
                 @RequestParam("url") String credentialUrl,
                 @RequestParam("username") String credentialUsername,

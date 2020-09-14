@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-                        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()">
+                        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()" id="addNewNote">
                             + Add a New Note
                         </button>
 
@@ -103,8 +103,8 @@
                                     </tr>
                                     <tr th:each="note: ${notes}">
                                         <td>
-                                            <button type="button" class="btn btn-success" th:onclick="javascript:showNoteModal([[${note.noteId}]],[[${note.noteTitle}]],[[${note.noteDescription}]] )">Edit</button>
-                                            <a class="btn btn-danger" th:href="@{/delete-note/{id}(id=${note.noteId})}">Delete</a>
+                                            <button type="button" class="btn btn-success" th:onclick="javascript:showNoteModal([[${note.noteid}]],[[${note.noteTitle}]],[[${note.noteDescription}]] )">Edit</button>
+                                            <a class="btn btn-danger delete-note" th:href="@{/delete-note/{id}(id=${note.noteid})}">Delete</a>
                                         </td>
                                         <th scope="row" th:text="${note.noteTitle}"></th>
                                         <td th:text="${note.noteDescription}"></td>
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form method="POST" th:action="@{/addNote}">
-                                            <input type="hidden" name="noteId" id="note-id">
+                                            <input type="hidden" name="noteid" id="note-id">
                                             <div class="form-group">
                                                 <label for="note-title" class="col-form-label">Title</label>
                                                 <input type="text" name= "noteTitle" class="form-control" id="note-title" maxlength="20" required>
@@ -223,8 +223,8 @@
         <!--For opening the note modal-->
         <script type="text/javascript">
             // For opening the note modal
-            function showNoteModal(noteId, noteTitle, noteDescription) {
-                $('#note-id').val(noteId ? noteId : '');
+            function showNoteModal(noteid, noteTitle, noteDescription) {
+                $('#note-id').val(noteid ? noteid : '');
                 $('#note-title').val(noteTitle ? noteTitle : '');
                 $('#note-description').val(noteDescription ? noteDescription : '');
                 $('#noteModal').modal('show');
